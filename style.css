@@ -1,0 +1,781 @@
+/* CSS Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+/* App Container */
+.app {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #fff;
+    min-height: 100vh;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.header i {
+    margin-right: 0.5rem;
+}
+
+/* Navigation */
+.nav {
+    display: flex;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    overflow-x: auto;
+}
+
+.nav-btn {
+    flex: 1;
+    min-width: 80px;
+    padding: 0.75rem 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    transition: all 0.2s ease;
+    color: #666;
+}
+
+.nav-btn:hover {
+    background: #e9ecef;
+    color: #333;
+}
+
+.nav-btn.active {
+    background: #667eea;
+    color: white;
+}
+
+.nav-btn i {
+    font-size: 1.2rem;
+}
+
+.nav-btn span {
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Main Content */
+.main {
+    padding: 1rem;
+}
+
+/* Sections */
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cards */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 1.5rem;
+    text-align: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 1px solid #e9ecef;
+}
+
+.card-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.card-header p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+/* Buttons */
+.action-button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.action-button.primary {
+    background: #667eea;
+    color: white;
+}
+
+.action-button.primary:hover {
+    background: #5a67d8;
+    transform: translateY(-1px);
+}
+
+.action-button.secondary {
+    background: #f8f9fa;
+    color: #333;
+    border: 1px solid #e9ecef;
+}
+
+.action-button.secondary:hover {
+    background: #e9ecef;
+}
+
+.action-button.success {
+    background: #28a745;
+    color: white;
+}
+
+.action-button.success:hover {
+    background: #218838;
+}
+
+.action-button.outline {
+    background: transparent;
+    color: #667eea;
+    border: 2px solid #667eea;
+}
+
+.action-button.outline:hover {
+    background: #667eea;
+    color: white;
+}
+
+.action-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* SOS Button */
+.sos-container {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+.sos-button {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff416c 0%, #ff4757 100%);
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-shadow: 0 5px 20px rgba(255, 65, 108, 0.3);
+}
+
+.sos-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 65, 108, 0.4);
+}
+
+.sos-button:active {
+    transform: scale(0.95);
+}
+
+.sos-button.active {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.sos-button i {
+    font-size: 2rem;
+}
+
+/* Emergency Alert */
+.emergency-alert {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #ffe6e6;
+    border: 1px solid #ffcccc;
+    border-radius: 8px;
+    animation: slideIn 0.3s ease;
+}
+
+.alert-content {
+    text-align: center;
+}
+
+.alert-content i {
+    color: #28a745;
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Location Display */
+.location-display {
+    margin: 1rem 0;
+    animation: fadeIn 0.3s ease;
+}
+
+.location-info {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid #e9ecef;
+}
+
+.location-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.location-status i {
+    color: #28a745;
+}
+
+.coordinates {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.maps-link {
+    color: #667eea;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.maps-link:hover {
+    text-decoration: underline;
+}
+
+.action-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.action-buttons .action-button {
+    margin-bottom: 0;
+}
+
+/* Route Section */
+.route-inputs {
+    margin-bottom: 1.5rem;
+}
+
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.map-container {
+    width: 100%;
+    height: 300px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Contacts Section */
+.add-contact-form {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.add-contact-form h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.add-contact-form .input-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 0.5rem;
+    align-items: end;
+}
+
+.contacts-list h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.contacts-container {
+    min-height: 100px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.contact-info h4 {
+    margin-bottom: 0.25rem;
+    color: #333;
+}
+
+.contact-info p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.contact-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.contact-actions button {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.contact-actions .call-btn {
+    background: #667eea;
+    color: white;
+}
+
+.contact-actions .whatsapp-btn {
+    background: #28a745;
+    color: white;
+}
+
+.contact-actions .delete-btn {
+    background: #dc3545;
+    color: white;
+}
+
+.contact-actions button:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+}
+
+/* Tips Section */
+.tips-container {
+    margin-bottom: 2rem;
+}
+
+.tip-category {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.tip-category h3 {
+    margin-bottom: 1rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tip-category i {
+    color: #667eea;
+}
+
+.tip-category ul {
+    list-style: none;
+}
+
+.tip-category li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e9ecef;
+    color: #555;
+}
+
+.tip-category li:last-child {
+    border-bottom: none;
+}
+
+.emergency-numbers {
+    padding: 1rem;
+    background: #ffe6e6;
+    border-radius: 8px;
+    border: 1px solid #ffcccc;
+}
+
+.emergency-numbers h3 {
+    margin-bottom: 1rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.numbers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.number-item {
+    text-align: center;
+    padding: 0.75rem;
+    background: white;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+}
+
+.number-item strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.number-item a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.number-item a:hover {
+    text-decoration: underline;
+}
+
+/* Instructions */
+.instructions {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.instructions p {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.instructions ul {
+    list-style: none;
+}
+
+.instructions li {
+    padding: 0.25rem 0;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.privacy-note {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    background: #e9ecef;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: #555;
+}
+
+/* Toast Notifications */
+.toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    z-index: 1000;
+    animation: toastSlideIn 0.3s ease;
+}
+
+.toast.success {
+    background: #28a745;
+}
+
+.toast.error {
+    background: #dc3545;
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+@keyframes toastSlideIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* --- Dark Mode Styles --- */
+body.dark-mode {
+    background: linear-gradient(135deg, #232526 0%, #414345 100%);
+    color: #eee;
+}
+body.dark-mode .app {
+    background: #18191a;
+    color: #eee;
+}
+body.dark-mode .header,
+body.dark-mode .header h1 {
+    background: linear-gradient(135deg, #232526 0%, #414345 100%);
+    color: #fff;
+}
+body.dark-mode .nav {
+    background: #232526;
+    border-bottom: 1px solid #333;
+}
+body.dark-mode .nav-btn {
+    color: #bbb;
+}
+body.dark-mode .nav-btn.active {
+    background: #444;
+    color: #fff;
+}
+body.dark-mode .card {
+    background: #232526;
+    color: #eee;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+body.dark-mode .card-header {
+    background: #232526;
+    border-bottom: 1px solid #333;
+}
+body.dark-mode .action-button.primary {
+    background: #444;
+    color: #fff;
+}
+body.dark-mode .action-button.secondary {
+    background: #232526;
+    color: #eee;
+    border: 1px solid #333;
+}
+body.dark-mode .action-button.outline {
+    background: transparent;
+    color: #bbb;
+    border: 2px solid #444;
+}
+body.dark-mode .action-button.success {
+    background: #218838;
+}
+body.dark-mode .sos-button {
+    background: linear-gradient(135deg, #ff416c 0%, #b31217 100%);
+    color: #fff;
+}
+body.dark-mode .emergency-alert {
+    background: #3a2323;
+    border: 1px solid #b31217;
+}
+body.dark-mode .location-info,
+body.dark-mode .add-contact-form,
+body.dark-mode .tip-category,
+body.dark-mode .instructions,
+body.dark-mode .contacts-list,
+body.dark-mode .number-item {
+    background: #232526;
+    color: #eee;
+    border-color: #333;
+}
+body.dark-mode .contact-item {
+    background: #232526;
+    border: 1px solid #333;
+}
+body.dark-mode .toast {
+    background: #222;
+    color: #fff;
+}
+body.dark-mode .toast.success {
+    background: #218838;
+}
+body.dark-mode .toast.error {
+    background: #b31217;
+}
+body.dark-mode .privacy-note {
+    background: #232526;
+    color: #bbb;
+}
+body.dark-mode .maps-link,
+body.dark-mode .number-item a {
+    color: #8faaff;
+}
+
+/* --- Dark Mode Toggle Button Styles --- */
+#darkModeToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 2000;
+    background: rgba(40, 40, 40, 0.9);
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    font-size: 1.3rem;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+
+#darkModeToggle:hover {
+    background: #fff;
+    color: #232526;
+    border: 2px solid #232526;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+/* Map Zoom Modal */
+.map-zoom-modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+}
+.map-zoom-modal.hidden {
+    display: none;
+}
+.map-zoom-content {
+    position: relative;
+    background: #222;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    max-width: 95vw;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.map-zoom-content img {
+    max-width: 90vw;
+    max-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+}
+.close-map-zoom {
+    position: absolute;
+    top: 10px; right: 10px;
+    background: #fff;
+    color: #222;
+    border: none;
+    border-radius: 50%;
+    width: 32px; height: 32px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+.close-map-zoom:hover {
+    background: #ff416c;
+    color: #fff;
+}

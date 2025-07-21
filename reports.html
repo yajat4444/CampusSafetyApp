@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Community Reports - Campus Safety</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .reports-header {
+            text-align: center;
+            margin: 2rem 0 1rem 0;
+        }
+        .reports-stats {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .reports-stat {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem 2rem;
+            text-align: center;
+            min-width: 120px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .reports-stat .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .reports-stat .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+        .report-btn {
+            display: block;
+            margin: 0 auto 2rem auto;
+            background: #667eea;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .report-btn:hover {
+            background: #5a67d8;
+        }
+        .reports-list {
+            margin: 0 auto 2rem auto;
+            max-width: 600px;
+        }
+        .report-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .report-title {
+            font-weight: bold;
+            margin-bottom: 0.25rem;
+        }
+        .report-meta {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+        .report-desc {
+            margin-bottom: 0.5rem;
+        }
+        .no-reports {
+            text-align: center;
+            color: #888;
+            margin: 2rem 0;
+        }
+        .report-form-modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+        }
+        .report-form {
+            background: #fff;
+            border-radius: 10px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+        }
+        .report-form h2 {
+            margin-bottom: 1rem;
+        }
+        .report-form label {
+            font-weight: 500;
+            margin-top: 1rem;
+            display: block;
+        }
+        .report-form input,
+        .report-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-top: 0.25rem;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        .report-form textarea {
+            min-height: 80px;
+        }
+        .report-form .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .report-form button {
+            flex: 1;
+        }
+        @media (max-width: 600px) {
+            .reports-list, .report-form { max-width: 98vw; }
+        }
+        body.dark-mode .reports-stat,
+        body.dark-mode .report-card,
+        body.dark-mode .report-form {
+            background: #232526;
+            color: #fff;
+        }
+        body.dark-mode .report-form input,
+        body.dark-mode .report-form textarea {
+            background: #18191a;
+            color: #fff;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <button onclick="window.location.href='index.html'" class="action-button secondary" style="margin:1rem 0 0 1rem;">
+            <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <div class="reports-header">
+            <h1>Community Reports</h1>
+            <p>Help keep the campus safe for everyone</p>
+        </div>
+        <div class="reports-stats">
+            <div class="reports-stat">
+                <div class="stat-label">Total Reports</div>
+                <div class="stat-value" id="totalReports">0</div>
+            </div>
+            <div class="reports-stat">
+                <div class="stat-label">Open Cases</div>
+                <div class="stat-value" id="openCases">0</div>
+            </div>
+        </div>
+        <button class="report-btn" id="openReportFormBtn">+ Report New Incident</button>
+        <div class="reports-list" id="reportsList"></div>
+        <div class="no-reports" id="noReportsMsg">No reports yet. Help keep the community safe by reporting incidents.</div>
+        <div class="tips-container" style="max-width:600px;margin:0 auto 2rem auto;">
+            <div class="tip-category">
+                <h3><i class="fas fa-lightbulb"></i> Reporting Tips</h3>
+                <ul>
+                    <li>Be specific about location and time</li>
+                    <li>Include relevant details without personal info</li>
+                    <li>Report immediately for urgent situations</li>
+                    <li>All reports are treated seriously and confidentially</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Report Form Modal -->
+    <div class="report-form-modal hidden" id="reportFormModal">
+        <form class="report-form" id="reportForm">
+            <h2>Report New Incident</h2>
+            <label for="incidentTitle">Title</label>
+            <input type="text" id="incidentTitle" required maxlength="60" placeholder="E.g. Suspicious activity near library">
+            <label for="incidentDesc">Description</label>
+            <textarea id="incidentDesc" required maxlength="300" placeholder="Describe what happened..."></textarea>
+            <label for="incidentLocation">Location</label>
+            <input type="text" id="incidentLocation" required maxlength="80" placeholder="E.g. Library Stairs, Hostel H">
+            <div class="form-actions">
+                <button type="submit" class="action-button primary">Submit</button>
+                <button type="button" class="action-button secondary" id="closeReportFormBtn">Cancel</button>
+            </div>
+        </form>
+    </div>
+    <!-- Add dark mode toggle here -->
+    <button id="darkModeToggle" class="action-button outline" title="Toggle dark mode" type="button" style="position:fixed;top:20px;right:20px;z-index:4000;">
+        <i class="fas fa-moon"></i>
+    </button>
+    <script>
+        // Dark mode support
+        if (localStorage.getItem('campusSafetyDarkMode') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+
+        // Modal logic
+        const openBtn = document.getElementById('openReportFormBtn');
+        const closeBtn = document.getElementById('closeReportFormBtn');
+        const modal = document.getElementById('reportFormModal');
+        openBtn.onclick = () => { modal.classList.remove('hidden'); };
+        closeBtn.onclick = () => { modal.classList.add('hidden'); };
+        modal.onclick = (e) => { if (e.target === modal) modal.classList.add('hidden'); };
+
+        // Reports logic
+        const reportsList = document.getElementById('reportsList');
+        const noReportsMsg = document.getElementById('noReportsMsg');
+        const totalReports = document.getElementById('totalReports');
+        const openCases = document.getElementById('openCases');
+        const reportForm = document.getElementById('reportForm');
+
+        function loadReports() {
+            const reports = JSON.parse(localStorage.getItem('campusSafetyReports') || '[]');
+            reportsList.innerHTML = '';
+            if (reports.length === 0) {
+                noReportsMsg.style.display = '';
+                totalReports.textContent = '0';
+                openCases.textContent = '0';
+                return;
+            }
+            noReportsMsg.style.display = 'none';
+            totalReports.textContent = reports.length;
+            openCases.textContent = reports.filter(r => !r.closed).length;
+            reports.slice().reverse().forEach((report, idx) => {
+                const card = document.createElement('div');
+                card.className = 'report-card';
+                card.innerHTML = `
+                    <div class="report-title">${report.title}</div>
+                    <div class="report-meta">${report.location} &bull; ${new Date(report.time).toLocaleString()}</div>
+                    <div class="report-desc">${report.desc}</div>
+                    <button class="action-button secondary delete-report-btn" data-index="${reports.length - 1 - idx}">
+                        <i class="fas fa-trash"></i> Delete
+                    </button>
+                `;
+                reportsList.appendChild(card);
+            });
+            document.querySelectorAll('.delete-report-btn').forEach(btn => {
+                btn.onclick = function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    if (confirm('Are you sure you want to delete this report?')) {
+                        const reports = JSON.parse(localStorage.getItem('campusSafetyReports') || '[]');
+                        reports.splice(index, 1);
+                        localStorage.setItem('campusSafetyReports', JSON.stringify(reports));
+                        loadReports();
+                    }
+                };
+            });
+        }
+
+        reportForm.onsubmit = function(e) {
+            e.preventDefault();
+            const title = document.getElementById('incidentTitle').value.trim();
+            const desc = document.getElementById('incidentDesc').value.trim();
+            const location = document.getElementById('incidentLocation').value.trim();
+            if (!title || !desc || !location) return;
+            const time = new Date().toISOString();
+            const reports = JSON.parse(localStorage.getItem('campusSafetyReports') || '[]');
+            reports.push({ title, desc, location, time, closed: false });
+            localStorage.setItem('campusSafetyReports', JSON.stringify(reports));
+            modal.classList.add('hidden');
+            reportForm.reset();
+            loadReports();
+        };
+
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.onclick = () => {
+            const isDark = document.body.classList.toggle('dark-mode');
+            localStorage.setItem('campusSafetyDarkMode', isDark ? 'dark' : 'light');
+            darkModeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        };
+
+        window.onload = loadReports;
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</body>
+</html>

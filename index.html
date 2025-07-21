@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Safety</title>
+ <meta name="description" content="Campus safety companion app for college students - SOS alerts, location sharing, safe routes, and emergency contacts">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <h1><i class="fas fa-shield-alt"></i> Campus Safety</h1>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <button class="nav-btn active" data-section="sos">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>SOS</span>
+            </button>
+            <button class="nav-btn" data-section="location">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Location</span>
+            </button>
+            <button class="nav-btn" data-section="contacts">
+                <i class="fas fa-address-book"></i>
+                <span>Contacts</span>
+            </button>
+            <button class="nav-btn" data-section="tips">
+                <i class="fas fa-lightbulb"></i>
+                <span>Tips</span>
+            </button>
+            <a class="nav-btn" href="reports.html" style="text-decoration:none;">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Reports</span>
+            </a>
+            <button class="nav-btn" data-section="map">
+                <i class="fas fa-map"></i>
+                <span>Map</span>
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- SOS Section -->
+            <section id="sos" class="section active">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Emergency SOS</h2>
+                        <p>Press for immediate help</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="sos-container">
+                            <button id="sosButton" class="sos-button">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <span>SOS</span>
+                            </button>
+                        </div>
+                        
+                        <div id="emergencyAlert" class="emergency-alert hidden">
+                            <div class="alert-content">
+                                <i class="fas fa-check-circle"></i>
+                                <p><strong>🚨 Emergency Alert Sent!</strong></p>
+                                <p>WhatsApp message with your location has been prepared</p>
+                            </div>
+                        </div>
+
+                        <button id="callSecurityBtn" class="action-button secondary">
+                            <i class="fas fa-phone"></i>
+                            Call Campus Security
+                        </button>
+
+                        <!-- New Fake Call Button -->
+                        <button id="fakeCallBtn" class="action-button outline" style="margin-top:1rem;">
+                            <i class="fas fa-phone-volume"></i>
+                            Fake Call
+                        </button>
+
+                        <div class="instructions">
+                            <p><strong>How it works:</strong></p>
+                            <ul>
+                                <li>• SOS button opens WhatsApp with emergency message</li>
+                                <li>• Your location is automatically included</li>
+                                <li>• Choose contacts to send the alert to</li>
+                                <li>• Campus security can be called directly</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Location Section -->
+            <section id="location" class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Location Sharing</h2>
+                        <p>Share your location with trusted contacts</p>
+                    </div>
+                    <div class="card-content">
+                        <button id="getLocationBtn" class="action-button primary">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Get Current Location</span>
+                        </button>
+
+                        <div id="locationDisplay" class="location-display hidden">
+                            <div class="location-info">
+                                <div class="location-status">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Location Found</span>
+                                </div>
+                                <p class="coordinates">
+                                    <small>Latitude: <span id="latitude"></span></small><br>
+                                    <small>Longitude: <span id="longitude"></span></small>
+                                </p>
+                                <a id="mapsLink" href="#" target="_blank" class="maps-link">
+                                    View on Google Maps →
+                                </a>
+                            </div>
+
+                            <div class="action-buttons">
+                                <button id="copyLocationBtn" class="action-button outline">
+                                    <i class="fas fa-copy"></i>
+                                    Copy Link
+                                </button>
+                                <button id="shareWhatsAppBtn" class="action-button success">
+                                    <i class="fab fa-whatsapp"></i>
+                                    WhatsApp
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="instructions">
+                            <p><strong>How to use:</strong></p>
+                            <ul>
+                                <li>• Click "Get Location" to fetch your current position</li>
+                                <li>• Copy the link to share manually</li>
+                                <li>• Use WhatsApp to send location to contacts</li>
+                                <li>• Location is accurate within a few meters</li>
+                            </ul>
+                            <div class="privacy-note">
+                                <strong>Privacy:</strong> Your location is only shared when you choose to send it. No data is stored on our servers.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Emergency Contacts Section -->
+            <section id="contacts" class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Emergency Contacts</h2>
+                        <p>Manage your trusted contacts</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="add-contact-form">
+                            <h3>Add New Contact</h3>
+                            <div class="input-group">
+                                <input type="text" id="contactName" placeholder="Contact Name">
+                                <input type="tel" id="contactPhone" placeholder="Phone Number">
+                                <button id="addContactBtn" class="action-button primary">
+                                    <i class="fas fa-plus"></i>
+                                    Add Contact
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="contacts-list">
+                            <h3>Your Contacts</h3>
+                            <div id="contactsList" class="contacts-container">
+                            </div>
+                        </div>
+
+                        <div class="instructions">
+                            <p><strong>Quick Actions:</strong></p>
+                            <ul>
+                                <li>• Call contacts directly with one tap</li>
+                                <li>• Send location via WhatsApp instantly</li>
+                                <li>• Edit or remove contacts as needed</li>
+                                <li>• Contacts are saved locally on your device</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Safety Tips Section -->
+            <section id="tips" class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Campus Safety Tips</h2>
+                        <p>Stay informed and stay safe</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="tips-container">
+                            <div class="tip-category">
+                                <h3><i class="fas fa-moon"></i> Night Safety</h3>
+                                <ul>
+                                    <li>Always walk in well-lit areas</li>
+                                    <li>Stay on main pathways and avoid shortcuts</li>
+                                    <li>Keep your phone charged and accessible</li>
+                                    <li>Walk with confidence and be aware of surroundings</li>
+                                    <li>Use campus shuttle services when available</li>
+                                </ul>
+                            </div>
+
+                            <div class="tip-category">
+                                <h3><i class="fas fa-users"></i> Group Safety</h3>
+                                <ul>
+                                    <li>Travel in groups whenever possible</li>
+                                    <li>Use buddy system for late-night activities</li>
+                                    <li>Share your location with trusted friends</li>
+                                    <li>Establish check-in times with roommates</li>
+                                    <li>Know campus escort services contact info</li>
+                                </ul>
+                            </div>
+
+                            <div class="tip-category">
+                                <h3><i class="fas fa-mobile-alt"></i> Technology Safety</h3>
+                                <ul>
+                                    <li>Keep emergency contacts easily accessible</li>
+                                    <li>Download campus safety apps</li>
+                                    <li>Enable location sharing with trusted contacts</li>
+                                    <li>Keep your devices charged</li>
+                                    <li>Know campus emergency numbers by heart</li>
+                                </ul>
+                            </div>
+
+                            <div class="tip-category">
+                                <h3><i class="fas fa-exclamation-triangle"></i> Emergency Preparedness</h3>
+                                <ul>
+                                    <li>Know locations of emergency call boxes</li>
+                                    <li>Familiarize yourself with campus security procedures</li>
+                                    <li>Keep important phone numbers saved</li>
+                                    <li>Trust your instincts - if something feels wrong, seek help</li>
+                                    <li>Report suspicious activities to campus security</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="emergency-numbers">
+                            <h3><i class="fas fa-phone"></i> Important Numbers</h3>
+                            <div class="numbers-grid">
+                                <div class="number-item">
+                                    <strong>Campus Security</strong>
+                                    <a href="tel:1752394700">📞 175-2394700</a>
+                                </div>
+                                <div class="number-item">
+                                    <strong>Emergency Services</strong>
+                                    <a href="tel:100">📞 100</a>
+                                </div>
+                                <div class="number-item">
+                                    <strong>Campus Health</strong>
+                                    <a href="tel:1752394455">📞 175-2394455</a>
+                                </div>
+                                <div class="number-item">
+                                    <strong>Student Support</strong>
+                                    <a href="tel:18002024100">📞 1800 202 4100</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Campus Map Section -->
+            <section id="map" class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Campus Map</h2>
+                        <p>Select two locations to see the path</p>
+                    </div>
+                    <div class="card-content">
+                        <div style="overflow:auto;">
+                            <canvas id="campusMapCanvas" width="750" height="401" style="max-width:100%;border:1px solid #ccc;background:#e9ecef;"></canvas>
+                        </div>
+                        <div style="margin-top:1rem;">
+                            <button id="resetMapBtn" class="action-button secondary" type="button">
+                                <i class="fas fa-undo"></i> Reset Selection
+                            </button>
+                        </div>
+                        <div class="instructions">
+                            <p><strong>How to use:</strong></p>
+                            <ul>
+                                <li>Click on the map to select your <b>start</b> and <b>end</b> points.</li>
+                                <li>The shortest path will be shown as a red line.</li>
+                                <li>Click "Reset Selection" to choose new points.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Toast Notifications -->
+        <div id="toast" class="toast hidden">
+            <div class="toast-content">
+                <i class="toast-icon"></i>
+                <span class="toast-message"></span>
+            </div>
+        </div>
+        <!-- Move dark mode toggle here -->
+        <button id="darkModeToggle" class="action-button outline" title="Toggle dark mode" type="button">
+            <i class="fas fa-moon"></i>
+        </button>
+
+        <!-- Map Zoom Modal -->
+        <div id="mapZoomModal" class="map-zoom-modal hidden">
+            <div class="map-zoom-content">
+                <button id="closeMapZoom" class="close-map-zoom">&times;</button>
+                <img src="campus-map.png" alt="Campus Map Zoomed" id="zoomedMapImg">
+            </div>
+        </div>
+
+        <audio id="fakeCallAudio" src="ringtone.mp3" preload="auto"></audio>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="darkmode.js"></script>
+</body>
+</html>
